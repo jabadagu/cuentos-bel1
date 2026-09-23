@@ -1,6 +1,6 @@
 /**
  * CUENTO INTERACTIVO: "Garu y el globo que lo llevó al cielo"
- * Autoras: Catherin Fiorella Asunción Adriánzen & BSC
+ * Autora: Catherin Fiorella Asunción Adriánzen
  */
 
 // ==========================================================================
@@ -157,7 +157,7 @@ const BOOK_PAGES = [
     badge: "Reflexión y Créditos",
     image: "assets/illustrations/lamina-11.webp",
     audio: "assets/audio/page-11.mp3",
-    narrationText: "¡Hola, amiguito! Esperamos que hayas disfrutado este viaje con Garu. Recuerda que todas las emociones son válidas: la felicidad, la tristeza y el enojo. Y cuando sientas que el globo de tus emociones sube muy alto, respira hondo como la nube gatito para volver a la calma. Cuento creado con mucho cariño por Catherin Fiorella Asunción Adriánzen y B S C.",
+    narrationText: "¡Hola, amiguito! Esperamos que hayas disfrutado este viaje con Garu. Recuerda que todas las emociones son válidas: la felicidad, la tristeza y el enojo. Y cuando sientas que el globo de tus emociones sube muy alto, respira hondo como la nube gatito para volver a la calma. Cuento creado con mucho cariño por Catherin Fiorella Asunción Adriánzen.",
     textHtml: `
       <div style="background: #fff8e1; border: 2px solid #ffe082; padding: 16px; border-radius: 16px; margin-bottom: 12px;">
         <h4 style="color: #f57f17; font-size: 1.25rem; margin-bottom: 6px;">🌈 ¿Qué aprendimos hoy con Garu?</h4>
@@ -168,8 +168,7 @@ const BOOK_PAGES = [
       <div style="background: #e8f5e9; border: 2px solid #c8e6c9; padding: 14px; border-radius: 14px; text-align: center;">
         <p style="margin: 0; font-size: 1.1rem; color: #2e7d32; font-weight: 700;">
           🎉 Cuento original creado por:<br>
-          <span style="color: #c2185b; font-size: 1.25rem;">Catherin Fiorella Asunción Adriánzen</span><br>
-          y <span style="color: #c2185b; font-size: 1.25rem;">BSC</span>
+          <span style="color: #c2185b; font-size: 1.25rem;">Catherin Fiorella Asunción Adriánzen</span>
         </p>
       </div>
     `
