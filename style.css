@@ -1,0 +1,995 @@
+/* ==========================================================================
+   ESTILOS DEL CUENTO INFANTIL "GARU Y EL GLOBO QUE LO LLEVÓ AL CIELO"
+   Autoras: Catherin Fiorella Asunción Adriánzen & BSC
+   ========================================================================== */
+
+:root {
+  --sky-top: #b3e5fc;
+  --sky-bottom: #e1f5fe;
+  --primary-red: #ff334b;
+  --primary-red-hover: #e0283f;
+  --primary-blue: #0288d1;
+  --primary-blue-hover: #0277bd;
+  --sun-gold: #ffb300;
+  --paper-bg: #ffffff;
+  --paper-border: #d0e7f7;
+  --text-main: #263238;
+  --text-muted: #546e7a;
+  --font-child: 'Fredoka', 'Comic Neue', cursive, sans-serif;
+  --font-text: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  --shadow-book: 0 16px 36px rgba(2, 136, 209, 0.16), 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-btn: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-text);
+  color: var(--text-main);
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ==========================================================================
+   FONDO ANIMADO DE CIELO Y NUBES
+   ========================================================================== */
+.sky-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 100px;
+  filter: blur(1px);
+  animation: floatCloud linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cloud-1 {
+  width: 240px;
+  height: 70px;
+  top: 10%;
+  left: -250px;
+  animation-duration: 45s;
+}
+.cloud-1::before { width: 90px; height: 90px; top: -45px; left: 35px; }
+.cloud-1::after { width: 120px; height: 120px; top: -65px; left: 95px; }
+
+.cloud-2 {
+  width: 320px;
+  height: 90px;
+  top: 45%;
+  left: -350px;
+  animation-duration: 65s;
+  animation-delay: 15s;
+  opacity: 0.6;
+}
+.cloud-2::before { width: 130px; height: 130px; top: -60px; left: 45px; }
+.cloud-2::after { width: 150px; height: 150px; top: -80px; left: 140px; }
+
+.cloud-3 {
+  width: 200px;
+  height: 60px;
+  top: 75%;
+  left: -220px;
+  animation-duration: 35s;
+  animation-delay: 5s;
+  opacity: 0.5;
+}
+.cloud-3::before { width: 80px; height: 80px; top: -40px; left: 30px; }
+.cloud-3::after { width: 100px; height: 100px; top: -55px; left: 80px; }
+
+.cloud-4 {
+  width: 280px;
+  height: 80px;
+  top: 25%;
+  left: -300px;
+  animation-duration: 55s;
+  animation-delay: 25s;
+  opacity: 0.7;
+}
+.cloud-4::before { width: 100px; height: 100px; top: -50px; left: 40px; }
+.cloud-4::after { width: 130px; height: 130px; top: -70px; left: 120px; }
+
+@keyframes floatCloud {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 400px)); }
+}
+
+.balloon-ambient {
+  position: absolute;
+  bottom: -150px;
+  right: 8%;
+  width: 65px;
+  height: 85px;
+  background: radial-gradient(circle at 35% 30%, #ff8a80, #ff1744 70%);
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  box-shadow: 0 10px 20px rgba(255, 23, 68, 0.25);
+  animation: floatAmbientBalloon 26s ease-in-out infinite;
+  opacity: 0.75;
+}
+
+.balloon-ambient::after {
+  content: '';
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 35px;
+  background: #ffb300;
+}
+
+@keyframes floatAmbientBalloon {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  50% { transform: translateY(-70vh) rotate(6deg) translateX(-40px); }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-120vh) rotate(-6deg) translateX(30px); opacity: 0; }
+}
+
+/* ==========================================================================
+   PANTALLA 1: PORTADA INICIAL
+   ========================================================================== */
+.cover-screen-container {
+  display: none;
+  min-height: 100vh;
+  padding: 30px 20px;
+  position: relative;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-screen-container.active {
+  display: flex;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.cover-card {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(10px);
+  border: 4px solid #b3e5fc;
+  border-radius: 28px;
+  box-shadow: var(--shadow-book);
+  max-width: 680px;
+  width: 100%;
+  padding: 36px 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.cover-tag {
+  display: inline-block;
+  background: #e1f5fe;
+  color: #0288d1;
+  font-family: var(--font-child);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 5px 16px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.cover-title {
+  font-family: var(--font-child);
+  font-size: 2.1rem;
+  color: #01579b;
+  line-height: 1.25;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.cover-authors {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+.cover-authors strong {
+  color: #c2185b;
+}
+
+/* Marco de la imagen de portada */
+.cover-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(2, 136, 209, 0.2);
+  border: 4px solid #ffffff;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cover-image-wrapper:hover {
+  transform: scale(1.02);
+}
+
+.cover-hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cover-balloon-bounce {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 2.2rem;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
+  animation: bounceBalloon 2.4s ease-in-out infinite;
+}
+
+@keyframes bounceBalloon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.cover-synopsis {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #455a64;
+  max-width: 520px;
+}
+
+/* BOTONES PRINCIPALES DE ENTRADA: ESCUCHAR Y LEER */
+.cover-action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  max-width: 520px;
+  margin-top: 6px;
+}
+
+@media (max-width: 520px) {
+  .cover-action-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main-action-btn {
+  border: none;
+  border-radius: 20px;
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  box-shadow: var(--shadow-btn);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.main-action-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.main-action-btn:active {
+  transform: translateY(1px);
+}
+
+.main-action-btn .btn-icon {
+  font-size: 2.3rem;
+  line-height: 1;
+}
+
+.btn-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-primary-text {
+  font-family: var(--font-child);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.btn-secondary-text {
+  font-size: 0.82rem;
+  opacity: 0.9;
+  margin-top: 3px;
+}
+
+/* Botón Escuchar: Rojo Globo */
+.btn-listen {
+  background: linear-gradient(135deg, #ff334b, #d50000);
+  color: #ffffff;
+}
+
+/* Botón Leer: Azul Cielo */
+.btn-read {
+  background: linear-gradient(135deg, #0288d1, #01579b);
+  color: #ffffff;
+}
+
+.cover-footer-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   PANTALLA 2: LIBRO ABIERTO
+   ========================================================================== */
+.book-screen-container {
+  display: none;
+  min-height: 100vh;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
+  padding: 12px 16px 24px;
+}
+
+.book-screen-container.active {
+  display: flex;
+  animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Barra superior del libro */
+.book-top-bar {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border: 2px solid #b3e5fc;
+  border-radius: 50px;
+  padding: 8px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto 16px;
+  box-shadow: 0 4px 14px rgba(2, 136, 209, 0.1);
+}
+
+.bar-btn {
+  background: #e1f5fe;
+  color: #0277bd;
+  border: 1px solid #b3e5fc;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-family: var(--font-child);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.bar-btn:hover {
+  background: #0288d1;
+  color: #ffffff;
+}
+
+.bar-btn.icon-only {
+  padding: 8px 12px;
+  font-size: 1.1rem;
+}
+
+.bar-book-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.bar-title {
+  font-family: var(--font-child);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #01579b;
+}
+
+.bar-authors {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ESCENARIO DEL LIBRO ABIERTO */
+.open-book-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1150px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.open-book {
+  background: var(--paper-bg);
+  border: 4px solid var(--paper-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-book);
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  min-height: 540px;
+}
+
+/* PÁGINAS DEL LIBRO (IZQUIERDA Y DERECHA) */
+.book-page {
+  flex: 1;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #ffffff;
+}
+
+.page-left {
+  background: linear-gradient(to right, #fbfdff 0%, #ffffff 92%, #f2f7fb 100%);
+  border-right: 1px solid #e1eaf0;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-right {
+  background: linear-gradient(to left, #fbfdff 0%, #ffffff 92%, #f2f7fb 100%);
+  border-left: 1px solid #e1eaf0;
+  justify-content: space-between;
+}
+
+/* Lomo central de encuadernación */
+.book-spine-divider {
+  width: 12px;
+  background: linear-gradient(to right, 
+    rgba(0, 0, 0, 0.12) 0%, 
+    rgba(0, 0, 0, 0.02) 40%, 
+    rgba(0, 0, 0, 0.02) 60%, 
+    rgba(0, 0, 0, 0.12) 100%
+  );
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Esquinas decorativas de página */
+.page-decor-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+.corner-tl { top: 12px; left: 12px; border-top: 2px solid #b3e5fc; border-left: 2px solid #b3e5fc; }
+.corner-bl { bottom: 12px; left: 12px; border-bottom: 2px solid #b3e5fc; border-left: 2px solid #b3e5fc; }
+.corner-tr { top: 12px; right: 12px; border-top: 2px solid #b3e5fc; border-right: 2px solid #b3e5fc; }
+.corner-br { bottom: 12px; right: 12px; border-bottom: 2px solid #b3e5fc; border-right: 2px solid #b3e5fc; }
+
+/* MARCO DE LA ILUSTRACIÓN (Página Izquierda) */
+.illustration-frame {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(2, 136, 209, 0.18);
+  border: 4px solid #f0f9ff;
+  background: #e1f5fe;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.illustration-frame:hover {
+  transform: scale(1.02);
+}
+
+.scene-artwork {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.interactive-tap-overlay {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  pointer-events: none;
+}
+
+.tap-hint {
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #ff5252;
+  color: #d32f2f;
+  font-family: var(--font-child);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  animation: pulseHint 2.4s infinite;
+}
+
+@keyframes pulseHint {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* PÁGINA DERECHA: ENCABEZADO Y TEXTO */
+.page-scene-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.scene-badge {
+  background: #fce4ec;
+  color: #c2185b;
+  font-family: var(--font-child);
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.speed-control-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.speed-title {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.speed-pill {
+  background: #ffffff;
+  border: 1px solid #b3e5fc;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-family: var(--font-child);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0277bd;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.speed-pill.active {
+  background: #0277bd;
+  color: #ffffff;
+  border-color: #0277bd;
+}
+
+/* Caja de texto del cuento */
+.story-text-container {
+  font-family: var(--font-child);
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #37474f;
+  margin-bottom: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.story-text-container p {
+  margin-bottom: 12px;
+}
+
+.story-text-container p:last-child {
+  margin-bottom: 0;
+}
+
+/* Resaltado de emociones */
+.emotion-highlight {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  transition: transform 0.2s;
+}
+
+.emotion-highlight:hover {
+  transform: scale(1.08);
+}
+
+.emotion-highlight.felicidad {
+  background: #fff9c4;
+  color: #f57f17;
+  border: 1px solid #fff176;
+}
+
+.emotion-highlight.tristeza {
+  background: #e1f5fe;
+  color: #0277bd;
+  border: 1px solid #81d4fa;
+}
+
+.emotion-highlight.enojo {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+.emotion-highlight.calma {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+/* REPRODUCTOR DE AUDIO DEBAJO DEL TEXTO */
+.page-audio-player {
+  background: #f8fcff;
+  border: 2px solid #b3e5fc;
+  border-radius: 18px;
+  padding: 14px 18px;
+  box-shadow: 0 4px 12px rgba(2, 136, 209, 0.08);
+  margin-bottom: 10px;
+}
+
+.audio-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+/* Botón grande de reproducir audio */
+.audio-play-btn {
+  background: linear-gradient(135deg, #ff334b, #d50000);
+  color: #ffffff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 50px;
+  font-family: var(--font-child);
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 16px rgba(213, 0, 0, 0.3);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
+}
+
+.audio-play-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(213, 0, 0, 0.4);
+}
+
+.audio-play-btn:active {
+  transform: translateY(1px);
+}
+
+.audio-play-btn.playing {
+  background: linear-gradient(135deg, #ff9100, #ff6d00);
+  box-shadow: 0 6px 16px rgba(255, 109, 0, 0.35);
+  animation: pulseAudio 1.6s infinite;
+}
+
+@keyframes pulseAudio {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.audio-track-details {
+  flex: 1;
+}
+
+.audio-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.audio-track-title {
+  font-family: var(--font-child);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0277bd;
+}
+
+.audio-timer {
+  font-size: 0.82rem;
+  font-family: monospace;
+  color: var(--text-muted);
+}
+
+/* Barra de progreso interactiva (scrubber) */
+.audio-scrubber-track {
+  height: 8px;
+  background: #e0f2fe;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.audio-scrubber-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ff8a80, #ff1744);
+  border-radius: 8px;
+  transition: width 0.15s linear;
+}
+
+/* Barra de opciones de audio */
+.audio-options-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-top: 1px solid #e1f5fe;
+  padding-top: 8px;
+}
+
+.audio-status-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Ondas de sonido animadas */
+.wave-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.wave-bars i {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  background: #0288d1;
+  border-radius: 2px;
+}
+
+.wave-bars.active i:nth-child(1) { animation: wave 0.8s infinite 0.1s; }
+.wave-bars.active i:nth-child(2) { animation: wave 0.8s infinite 0.3s; }
+.wave-bars.active i:nth-child(3) { animation: wave 0.8s infinite 0.2s; }
+.wave-bars.active i:nth-child(4) { animation: wave 0.8s infinite 0.4s; }
+
+@keyframes wave {
+  0%, 100% { height: 3px; }
+  50% { height: 14px; }
+}
+
+.auto-advance-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-family: var(--font-child);
+  font-weight: 600;
+  color: #37474f;
+  cursor: pointer;
+  user-select: none;
+}
+
+.auto-advance-toggle input {
+  display: none;
+}
+
+.toggle-custom-box {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #b0bec5;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: transparent;
+  transition: all 0.2s;
+}
+
+.auto-advance-toggle input:checked + .toggle-custom-box {
+  background: #43a047;
+  border-color: #43a047;
+  color: #ffffff;
+}
+
+.page-bottom-number {
+  font-size: 0.85rem;
+  font-family: var(--font-child);
+  font-weight: 700;
+  color: #90a4ae;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* ==========================================================================
+   BARRA INFERIOR DE NAVEGACIÓN ENTRE PÁGINAS
+   ========================================================================== */
+.book-nav-footer {
+  max-width: 900px;
+  width: 100%;
+  margin: 16px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.nav-btn {
+  background: #ffffff;
+  color: #0277bd;
+  border: 3px solid #81d4fa;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-family: var(--font-child);
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-btn);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-btn:hover {
+  background: #e1f5fe;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(2, 136, 209, 0.25);
+}
+
+.nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Burbujas numeradas de páginas (1 a 10) */
+.page-selector-bubbles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.page-bubble {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #b3e5fc;
+  background: #ffffff;
+  font-family: var(--font-child);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0288d1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.page-bubble:hover {
+  background: #e1f5fe;
+  transform: scale(1.1);
+}
+
+.page-bubble.active {
+  background: #0288d1;
+  color: #ffffff;
+  border-color: #0288d1;
+  transform: scale(1.15);
+  box-shadow: 0 3px 10px rgba(2, 136, 209, 0.35);
+}
+
+/* ==========================================================================
+   ADAPTABILIDAD MÓVIL Y RESPONSIVA
+   ========================================================================== */
+@media (max-width: 850px) {
+  .open-book {
+    flex-direction: column;
+  }
+
+  .book-spine-divider {
+    display: none;
+  }
+
+  .book-page {
+    padding: 18px 20px;
+  }
+
+  .page-left {
+    border-right: none;
+    border-bottom: 2px dashed #b3e5fc;
+  }
+
+  .illustration-frame {
+    max-width: 360px;
+  }
+
+  .story-text-container {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+
+  .cover-title {
+    font-size: 1.6rem;
+  }
+
+  .nav-btn {
+    padding: 10px 16px;
+    font-size: 1rem;
+  }
+
+  .nav-btn .nav-text {
+    display: none;
+  }
+
+  .page-bubble {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Destellos interactivos al pulsar */
+.sparkle-particle {
+  position: absolute;
+  pointer-events: none;
+  font-size: 1.5rem;
+  animation: floatSparkle 0.8s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes floatSparkle {
+  0% { transform: scale(0.2) translate(0, 0); opacity: 1; }
+  100% { transform: scale(1.4) translate(var(--tx), var(--ty)); opacity: 0; }
+}

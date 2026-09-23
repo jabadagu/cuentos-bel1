@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Garu y el globo que lo llevó al cielo — Cuento Interactivo</title>
+  <meta name="description" content="Cuento infantil ilustrado con narración en audio y educación emocional. Creado por Catherin Fiorella Asunción Adriánzen y BSC.">
+  <meta name="theme-color" content="#4fc3f7">
+  
+  <!-- Tipografía amigable y moderna para niños -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Fondo animado con cielo azul y nubes flotantes -->
+  <div class="sky-background" aria-hidden="true">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="cloud cloud-4"></div>
+    <div class="balloon-ambient"></div>
+    <div class="sparkles-container" id="sparkles-container"></div>
+  </div>
+
+  <!-- ======================================================================
+       PANTALLA INICIAL: SOLO LA PORTADA (Al cargar el sitio)
+       ====================================================================== -->
+  <main id="cover-screen" class="cover-screen-container active">
+    <div class="cover-card">
+      
+      <div class="cover-header">
+        <span class="cover-tag">🎈 Cuento Infantil Ilustrado</span>
+        <h1 class="cover-title">“GARU Y EL GLOBO QUE LO LLEVÓ AL CIELO”</h1>
+        <p class="cover-authors">
+          Cuento original creado por: <strong>Catherin Fiorella Asunción Adriánzen</strong> y <strong>BSC</strong>
+        </p>
+      </div>
+
+      <!-- Imagen de la Portada (Lámina 1 Optimizada) -->
+      <div class="cover-image-wrapper" id="cover-image-wrapper">
+        <img src="assets/illustrations/lamina-1.webp" alt="Portada del cuento Garu y el globo que lo llevó al cielo" class="cover-hero-img">
+        <div class="cover-balloon-bounce" title="¡Tócame!">🎈</div>
+      </div>
+
+      <!-- BOTONES DE ACCIÓN PRINCIPALES -->
+      <div class="cover-action-buttons">
+        <button id="btn-start-listen" class="main-action-btn btn-listen">
+          <span class="btn-icon">🎧</span>
+          <div class="btn-texts">
+            <span class="btn-primary-text">Escuchar</span>
+            <span class="btn-secondary-text">Abre el libro con audio narrado</span>
+          </div>
+        </button>
+
+        <button id="btn-start-read" class="main-action-btn btn-read">
+          <span class="btn-icon">📖</span>
+          <div class="btn-texts">
+            <span class="btn-primary-text">Leer</span>
+            <span class="btn-secondary-text">Abre el libro a tu propio ritmo</span>
+          </div>
+        </button>
+      </div>
+
+      <footer class="cover-footer-note">
+        ✨ Toca la portada o las ilustraciones para escuchar sonidos y ver destellos mágicos.
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- ======================================================================
+       PANTALLA DEL LIBRO ABIERTO (2 PÁGINAS: Ilustración a la izquierda, Texto y Audio a la derecha)
+       ====================================================================== -->
+  <section id="book-screen" class="book-screen-container">
+    
+    <!-- Barra superior de navegación del libro -->
+    <header class="book-top-bar">
+      <button id="btn-back-to-cover" class="bar-btn home-btn" title="Volver a la portada">
+        <span>🏠</span> Portada
+      </button>
+
+      <div class="bar-book-info">
+        <span class="bar-title">«Garu y el globo que lo llevó al cielo»</span>
+        <span class="bar-authors">Catherin Fiorella Asunción Adriánzen & BSC</span>
+      </div>
+
+      <div class="bar-tools">
+        <button id="btn-fullscreen" class="bar-btn icon-only" title="Pantalla completa" aria-label="Pantalla completa">
+          ⛶
+        </button>
+      </div>
+    </header>
+
+    <!-- EL LIBRO ABIERTO -->
+    <div class="open-book-stage">
+      <div class="open-book" id="open-book">
+        
+        <!-- PÁGINA IZQUIERDA: LA ILUSTRACIÓN -->
+        <article class="book-page page-left" id="page-left">
+          <div class="page-decor-corner corner-tl"></div>
+          <div class="page-decor-corner corner-bl"></div>
+
+          <div class="illustration-frame" id="illustration-frame">
+            <img id="book-scene-img" src="assets/illustrations/lamina-2.webp" alt="Ilustración de la página" class="scene-artwork">
+            
+            <div class="interactive-tap-overlay" id="interactive-tap-overlay" title="¡Tócame para ver magia!">
+              <span class="tap-hint">✨ Toca la ilustración</span>
+            </div>
+          </div>
+
+          <div class="page-bottom-number">
+            <span id="left-page-indicator">Lámina 2</span>
+          </div>
+        </article>
+
+        <!-- LOMO CENTRAL DEL LIBRO (Efecto de encuadernación 3D) -->
+        <div class="book-spine-divider" aria-hidden="true"></div>
+
+        <!-- PÁGINA DERECHA: TEXTO Y AUDIO DEBAJO -->
+        <article class="book-page page-right" id="page-right">
+          <div class="page-decor-corner corner-tr"></div>
+          <div class="page-decor-corner corner-br"></div>
+
+          <!-- Encabezado de la página de texto -->
+          <div class="page-scene-header">
+            <span class="scene-badge" id="scene-badge">Página 1</span>
+            <div class="speed-control-group">
+              <span class="speed-title">Voz:</span>
+              <button class="speed-pill active" data-speed="1.0">1.0x</button>
+              <button class="speed-pill" data-speed="0.85">0.85x</button>
+            </div>
+          </div>
+
+          <!-- Texto de la historia -->
+          <div class="story-text-container" id="story-text-container">
+            <!-- Se inyecta por JavaScript -->
+          </div>
+
+          <!-- REPRODUCTOR DE AUDIO DE ESTA PÁGINA (DEBAJO DEL TEXTO) -->
+          <div class="page-audio-player" id="page-audio-player">
+            
+            <div class="audio-controls-row">
+              <!-- Botón grande de reproducir/pausar -->
+              <button id="btn-audio-toggle" class="audio-play-btn" title="Escuchar narración de esta página" aria-label="Escuchar narración">
+                <span class="audio-icon" id="audio-icon">🔊</span>
+                <span class="audio-label" id="audio-label">Escuchar</span>
+              </button>
+
+              <div class="audio-track-details">
+                <div class="audio-title-bar">
+                  <span class="audio-track-title" id="audio-track-title">Narración en Audio</span>
+                  <span class="audio-timer" id="audio-timer">0:00 / 0:00</span>
+                </div>
+
+                <!-- Barra de progreso interactiva -->
+                <div class="audio-scrubber-track" id="audio-scrubber-track">
+                  <div class="audio-scrubber-fill" id="audio-scrubber-fill"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="audio-options-bar">
+              <div class="audio-status-tag" id="audio-status-tag">
+                <span class="wave-bars" id="wave-bars">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+                <span id="audio-status-text">Listo para escuchar</span>
+              </div>
+
+              <label class="auto-advance-toggle">
+                <input type="checkbox" id="chk-auto-advance" checked>
+                <span class="toggle-custom-box">✓</span>
+                <span class="toggle-text">Pasar página automáticamente</span>
+              </label>
+            </div>
+
+          </div>
+
+          <div class="page-bottom-number text-right">
+            <span id="right-page-indicator">Página 1 de 10</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- BARRA INFERIOR DE NAVEGACIÓN -->
+    <nav class="book-nav-footer">
+      <button id="btn-prev-page" class="nav-btn prev-btn" title="Página anterior" aria-label="Página anterior">
+        <span class="nav-arrow">◀</span>
+        <span class="nav-text">Anterior</span>
+      </button>
+
+      <!-- Mini selector de páginas (burbujas numeradas del 1 al 10) -->
+      <div class="page-selector-bubbles" id="page-selector-bubbles" aria-label="Selector de páginas">
+        <!-- Generado dinámicamente -->
+      </div>
+
+      <button id="btn-next-page" class="nav-btn next-btn" title="Siguiente página" aria-label="Siguiente página">
+        <span class="nav-text">Siguiente</span>
+        <span class="nav-arrow">▶</span>
+      </button>
+    </nav>
+
+  </section>
+
+  <!-- Elemento de Audio HTML5 -->
+  <audio id="story-audio-element" preload="auto"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>
